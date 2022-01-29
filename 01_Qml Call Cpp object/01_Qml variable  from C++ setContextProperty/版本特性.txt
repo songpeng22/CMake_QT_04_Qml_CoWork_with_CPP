@@ -1,0 +1,26 @@
+﻿/*
+ * Point1 ： Must be inherited from QObject Class
+ */
+class PCpp : public QObject
+
+/*
+ * Point2 ： Q_INVOKABLE make normal function could be called by qml
+ */
+Q_INVOKABLE void cppMethod(const QString &msg) {
+	qDebug() << "Called the C++ method with" << msg;
+}
+
+public slots :
+/*
+ * Point3 ： slot function could be called by qml
+ */
+void cppSlot(int number) {
+	qDebug() << "Called the C++ slot with" << number;
+}
+
+PCpp * myClass = new PCpp();
+QQmlContext * context = engine.rootContext();
+/*
+ * Point4 ： myObject could be accessed through setContextProperty
+ */
+context->setContextProperty("myObject", myClass);
